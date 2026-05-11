@@ -1,0 +1,67 @@
+aid: pushover
+name: Pushover
+description: >-
+  Pushover is a simple push notification service that delivers real-time
+  notifications to phones, tablets, desktops, and watches from servers,
+  scripts, and applications. The Pushover Message API accepts HTTPS POSTs
+  with an application token and user/group key to send formatted messages
+  with priorities, sounds, images, and supplementary URLs. Additional APIs
+  exist for groups, subscriptions, licensing, receipts, and Open Client.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Notifications
+  - Push Notifications
+  - Messaging
+  - Alerts
+  - Monitoring
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/pushover/refs/heads/main/apis.yml
+created: '2026-05-11'
+modified: '2026-05-11'
+specificationVersion: '0.19'
+apis:
+  - aid: pushover:message-api
+    name: Pushover Message API
+    description: >-
+      REST API for sending push notifications to Pushover users and groups
+      via HTTPS POSTs to /1/messages.json. Authentication is token-based,
+      requiring an application API token and recipient user/group key with
+      each request; supports priorities, attachments, HTML, and sounds.
+    humanURL: https://pushover.net/api
+    baseURL: https://api.pushover.net/1
+    tags:
+      - Notifications
+      - Messaging
+      - Push
+      - Alerts
+    properties:
+      - type: Documentation
+        url: https://pushover.net/api
+      - type: Groups API
+        url: https://pushover.net/api/groups
+      - type: Subscriptions
+        url: https://pushover.net/api/subscriptions
+      - type: Receipts
+        url: https://pushover.net/api#receipt
+      - type: Open Client
+        url: https://pushover.net/api/client
+
+common:
+  - type: Website
+    url: https://pushover.net
+  - type: Documentation
+    url: https://pushover.net/api
+  - type: Pricing
+    url: https://pushover.net/pricing
+  - type: Sign Up
+    url: https://pushover.net/signup
+  - type: FAQ
+    url: https://pushover.net/faq
+  - type: Support
+    url: https://pushover.net/support
+  - type: Status
+    url: https://status.pushover.net
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
