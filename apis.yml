@@ -54,13 +54,13 @@ common:
     url: https://pushover.net/api
   - type: Pricing
     url: https://pushover.net/pricing
-  - type: Sign Up
+  - type: SignUp
     url: https://pushover.net/signup
   - type: FAQ
     url: https://pushover.net/faq
   - type: Support
     url: https://pushover.net/support
-  - type: Status
+  - type: StatusPage
     url: https://status.pushover.net
 maintainers:
   - FN: Kin Lane
