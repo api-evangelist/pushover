@@ -48,6 +48,8 @@ apis:
         url: https://pushover.net/api/client
 
 common:
+  - type: GitHubOrganization
+    url: https://github.com/pushoverapp
   - type: Website
     url: https://pushover.net
   - type: Documentation
