@@ -1,0 +1,513 @@
+asyncapi: '2.6.0'
+info:
+  title: Pushover Open Client API
+  version: '1.0.0'
+  description: |
+    AsyncAPI definition for the Pushover Open Client API, which combines
+    a real-time WebSocket channel for delivering server-to-client
+    notifications with REST channels used by clients to log in, register
+    devices, download/acknowledge messages, and by publishers to send
+    push notifications.
+
+    The WebSocket endpoint streams single-byte control frames after a
+    text-mode login frame is sent by the client. REST channels are
+    modeled here so that the asynchronous publish surface (sending a
+    push that eventually triggers a `!` frame to subscribed clients)
+    is documented alongside the live delivery channel.
+  contact:
+    name: Pushover
+    url: https://pushover.net
+  license:
+    name: Pushover Terms of Service
+    url: https://pushover.net/terms
+externalDocs:
+  description: Pushover Open Client API documentation
+  url: https://pushover.net/api/client
+defaultContentType: text/plain
+servers:
+  websocket:
+    url: client.pushover.net
+    protocol: wss
+    description: |
+      Secure WebSocket endpoint for real-time delivery of control
+      frames to logged-in client devices. Path is `/push`.
+  api:
+    url: api.pushover.net
+    protocol: https
+    description: |
+      REST API host used for client login, device registration,
+      message download, message acknowledgement, and publishing
+      pushes via /1/messages.json.
+channels:
+  /push:
+    description: |
+      Real-time WebSocket channel. After connecting, the client must
+      publish a login frame of the form `login:<device_id>:<secret>\n`
+      (newline = ASCII 10). The server then streams single-byte
+      control frames until the connection is closed.
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+        method: GET
+    publish:
+      operationId: sendLoginFrame
+      summary: Authenticate the WebSocket session.
+      description: |
+        The first frame the client sends after the WebSocket upgrade.
+        Format: `login:<device_id>:<secret>\n`. If authentication
+        fails, the server replies with an `E` frame and closes the
+        connection.
+      message:
+        $ref: '#/components/messages/LoginFrame'
+    subscribe:
+      operationId: receiveControlFrame
+      summary: Receive single-byte control frames from Pushover.
+      description: |
+        After a successful login, the server pushes single-character
+        frames indicating keep-alive, new message availability,
+        reload requests, permanent errors, or session termination
+        when the device logged in elsewhere.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/KeepAliveFrame'
+          - $ref: '#/components/messages/NewMessageFrame'
+          - $ref: '#/components/messages/ReloadFrame'
+          - $ref: '#/components/messages/PermanentErrorFrame'
+          - $ref: '#/components/messages/SessionClosedFrame'
+  /1/users/login.json:
+    description: |
+      REST channel used by a client to exchange an email and password
+      (and optional 2FA token) for a session `secret` later used in
+      the WebSocket login frame and other Open Client REST calls.
+    bindings:
+      http:
+        bindingVersion: '0.3.0'
+        type: request
+        method: POST
+    publish:
+      operationId: clientLogin
+      summary: Obtain a session secret for a Pushover user account.
+      message:
+        $ref: '#/components/messages/UserLoginRequest'
+    subscribe:
+      operationId: clientLoginResult
+      summary: Login result containing the session secret.
+      message:
+        $ref: '#/components/messages/UserLoginResponse'
+  /1/devices.json:
+    description: |
+      REST channel used by a client to register a new Open Client
+      device against the authenticated user account. The returned
+      device id is used in the WebSocket login frame.
+    bindings:
+      http:
+        bindingVersion: '0.3.0'
+        type: request
+        method: POST
+    publish:
+      operationId: registerDevice
+      summary: Register a new Open Client device.
+      message:
+        $ref: '#/components/messages/DeviceRegistrationRequest'
+    subscribe:
+      operationId: registerDeviceResult
+      summary: Result of a device registration call.
+      message:
+        $ref: '#/components/messages/DeviceRegistrationResponse'
+  /1/messages.json:
+    description: |
+      Dual-purpose REST channel. With GET it is used by Open Client
+      devices to download pending messages after receiving a `!`
+      frame on the WebSocket. With POST it is used by publishers to
+      send a push notification (the asynchronous trigger that
+      causes Pushover to fan out a `!` frame to subscribed
+      client devices).
+    bindings:
+      http:
+        bindingVersion: '0.3.0'
+        type: request
+    publish:
+      operationId: messagesChannelRequest
+      summary: Send a push notification or request pending messages.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SendPushRequest'
+          - $ref: '#/components/messages/DownloadMessagesRequest'
+    subscribe:
+      operationId: messagesChannelResponse
+      summary: Pending messages list or send result.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/DownloadMessagesResponse'
+          - $ref: '#/components/messages/SendPushResponse'
+  /1/devices/{device_id}/update_highest_message.json:
+    description: |
+      REST channel used to acknowledge messages up to and including
+      the given message id, marking them as deleted on the server.
+    parameters:
+      device_id:
+        description: The device id returned by /1/devices.json.
+        schema:
+          type: string
+    bindings:
+      http:
+        bindingVersion: '0.3.0'
+        type: request
+        method: POST
+    publish:
+      operationId: updateHighestMessage
+      summary: Delete messages up to a given highest message id.
+      message:
+        $ref: '#/components/messages/UpdateHighestMessageRequest'
+    subscribe:
+      operationId: updateHighestMessageResult
+      summary: Acknowledgement result.
+      message:
+        $ref: '#/components/messages/StatusResponse'
+  /1/receipts/{receipt}/acknowledge.json:
+    description: |
+      REST channel used by a client to acknowledge an emergency
+      (priority 2) message so Pushover stops retrying.
+    parameters:
+      receipt:
+        description: Receipt id from the original priority-2 message.
+        schema:
+          type: string
+    bindings:
+      http:
+        bindingVersion: '0.3.0'
+        type: request
+        method: POST
+    publish:
+      operationId: acknowledgeReceipt
+      summary: Acknowledge an emergency-priority receipt.
+      message:
+        $ref: '#/components/messages/AcknowledgeReceiptRequest'
+    subscribe:
+      operationId: acknowledgeReceiptResult
+      summary: Acknowledgement result.
+      message:
+        $ref: '#/components/messages/StatusResponse'
+components:
+  messages:
+    LoginFrame:
+      name: LoginFrame
+      title: WebSocket login frame
+      summary: Client-sent authentication frame.
+      contentType: text/plain
+      payload:
+        type: string
+        description: |
+          Exact byte sequence `login:<device_id>:<secret>\n`. The
+          terminating newline is ASCII 10.
+        pattern: '^login:[A-Za-z0-9]+:[A-Za-z0-9]+\n$'
+        examples:
+          - "login:zQie8WjzFTWkMz5CcGrUNK2t5rR9zG:SGx2Su5onMcXU2EVozWG41Fws42bHo\n"
+    KeepAliveFrame:
+      name: KeepAliveFrame
+      title: Keep-alive frame
+      summary: Single `#` byte sent periodically by the server.
+      description: |
+        Per the documentation: "Keep-alive packet, no response
+        needed." Clients should treat absence of these frames over
+        an extended interval as a dead connection and reconnect.
+      contentType: text/plain
+      payload:
+        type: string
+        const: '#'
+    NewMessageFrame:
+      name: NewMessageFrame
+      title: New message frame
+      summary: Single `!` byte indicating a new message is queued.
+      description: |
+        Per the documentation: "A new message has arrived; you
+        should perform a sync." On receipt, clients should GET
+        /1/messages.json with their `secret` and `device_id`.
+      contentType: text/plain
+      payload:
+        type: string
+        const: '!'
+    ReloadFrame:
+      name: ReloadFrame
+      title: Reload frame
+      summary: Single `R` byte requesting reconnection.
+      description: |
+        Per the documentation: "Reload request; you should drop
+        your connection and re-connect."
+      contentType: text/plain
+      payload:
+        type: string
+        const: 'R'
+    PermanentErrorFrame:
+      name: PermanentErrorFrame
+      title: Permanent error frame
+      summary: Single `E` byte for a non-recoverable error.
+      description: |
+        Per the documentation: "Error; a permanent problem occurred
+        and you should not automatically re-connect. Prompt the
+        user to login again."
+      contentType: text/plain
+      payload:
+        type: string
+        const: 'E'
+    SessionClosedFrame:
+      name: SessionClosedFrame
+      title: Session closed frame
+      summary: Single `A` byte; device logged in elsewhere.
+      description: |
+        Per the documentation: "Error; the device logged in from
+        another session and this session is being closed." Do not
+        automatically reconnect.
+      contentType: text/plain
+      payload:
+        type: string
+        const: 'A'
+    UserLoginRequest:
+      name: UserLoginRequest
+      title: User login request
+      contentType: application/x-www-form-urlencoded
+      payload:
+        type: object
+        required: [email, password]
+        properties:
+          email:
+            type: string
+            description: Pushover account email (case-sensitive).
+          password:
+            type: string
+            description: Pushover account password (case-sensitive).
+          twofa:
+            type: string
+            description: Two-factor code if the account has 2FA enabled.
+    UserLoginResponse:
+      name: UserLoginResponse
+      title: User login response
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          status:
+            type: integer
+            description: 1 on success, 0 on failure.
+          id:
+            type: string
+            description: User key.
+          secret:
+            type: string
+            description: Session secret used for subsequent calls and WS login.
+          request:
+            type: string
+    DeviceRegistrationRequest:
+      name: DeviceRegistrationRequest
+      title: Device registration request
+      contentType: application/x-www-form-urlencoded
+      payload:
+        type: object
+        required: [secret, name, os]
+        properties:
+          secret:
+            type: string
+            description: Session secret from /1/users/login.json.
+          name:
+            type: string
+            description: |
+              Device name; alphanumeric, underscore, or hyphen,
+              max 25 characters.
+            maxLength: 25
+            pattern: '^[A-Za-z0-9_-]+$'
+          os:
+            type: string
+            description: Must be `O` to register an Open Client device.
+            const: 'O'
+    DeviceRegistrationResponse:
+      name: DeviceRegistrationResponse
+      title: Device registration response
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          status:
+            type: integer
+          id:
+            type: string
+            description: Device id used in the WebSocket login frame.
+          request:
+            type: string
+          errors:
+            type: object
+    DownloadMessagesRequest:
+      name: DownloadMessagesRequest
+      title: Download messages request
+      contentType: application/x-www-form-urlencoded
+      payload:
+        type: object
+        required: [secret, device_id]
+        properties:
+          secret:
+            type: string
+          device_id:
+            type: string
+    DownloadMessagesResponse:
+      name: DownloadMessagesResponse
+      title: Download messages response
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          status:
+            type: integer
+          request:
+            type: string
+          messages:
+            type: array
+            items:
+              $ref: '#/components/schemas/ClientMessage'
+    SendPushRequest:
+      name: SendPushRequest
+      title: Publisher send-push request
+      contentType: application/x-www-form-urlencoded
+      payload:
+        $ref: '#/components/schemas/MessageRequest'
+    SendPushResponse:
+      name: SendPushResponse
+      title: Publisher send-push response
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          status:
+            type: integer
+            description: 1 on success.
+          request:
+            type: string
+          receipt:
+            type: string
+            description: Receipt token (only for priority=2 messages).
+    UpdateHighestMessageRequest:
+      name: UpdateHighestMessageRequest
+      title: Update highest message request
+      contentType: application/x-www-form-urlencoded
+      payload:
+        type: object
+        required: [secret, message]
+        properties:
+          secret:
+            type: string
+          message:
+            type: integer
+            description: Highest message id to delete up to.
+    AcknowledgeReceiptRequest:
+      name: AcknowledgeReceiptRequest
+      title: Acknowledge receipt request
+      contentType: application/x-www-form-urlencoded
+      payload:
+        type: object
+        required: [secret]
+        properties:
+          secret:
+            type: string
+    StatusResponse:
+      name: StatusResponse
+      title: Generic status response
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          status:
+            type: integer
+          request:
+            type: string
+          errors:
+            type: object
+  schemas:
+    ClientMessage:
+      type: object
+      description: A single message returned from /1/messages.json (client GET).
+      properties:
+        id:
+          type: integer
+        id_str:
+          type: string
+        umid:
+          type: integer
+        umid_str:
+          type: string
+        title:
+          type: string
+        message:
+          type: string
+        app:
+          type: string
+        aid:
+          type: integer
+        aid_str:
+          type: string
+        icon:
+          type: string
+        date:
+          type: integer
+        queued_date:
+          type: integer
+        dispatched_date:
+          type: integer
+        priority:
+          type: integer
+        sound:
+          type: string
+        url:
+          type: string
+        url_title:
+          type: string
+        acked:
+          type: integer
+        receipt:
+          type: string
+        html:
+          type: integer
+    MessageRequest:
+      type: object
+      required: [token, user, message]
+      properties:
+        token:
+          type: string
+          description: Application API token.
+        user:
+          type: string
+          description: Recipient user or group key.
+        message:
+          type: string
+          description: Message body (max 1024 UTF-8 characters).
+        title:
+          type: string
+        device:
+          type: string
+        priority:
+          type: integer
+          enum: [-2, -1, 0, 1, 2]
+        sound:
+          type: string
+        timestamp:
+          type: integer
+        ttl:
+          type: integer
+        url:
+          type: string
+        url_title:
+          type: string
+        html:
+          type: integer
+          enum: [0, 1]
+        monospace:
+          type: integer
+          enum: [0, 1]
+        retry:
+          type: integer
+        expire:
+          type: integer
+        attachment_base64:
+          type: string
+        attachment_type:
+          type: string
+        encrypted:
+          type: integer
+          enum: [0, 1]

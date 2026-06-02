@@ -18,7 +18,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/pushover/refs/heads/main/apis.yml
 created: '2026-05-11'
-modified: '2026-05-11'
+modified: '2026-05-30'
 specificationVersion: '0.19'
 apis:
   - aid: pushover:message-api
@@ -38,6 +38,8 @@ apis:
     properties:
       - type: Documentation
         url: https://pushover.net/api
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/pushover/refs/heads/main/openapi/pushover-openapi.yml
       - type: Groups API
         url: https://pushover.net/api/groups
       - type: Subscriptions
@@ -46,6 +48,28 @@ apis:
         url: https://pushover.net/api#receipt
       - type: Open Client
         url: https://pushover.net/api/client
+  - aid: pushover:open-client-api
+    name: Pushover Open Client API
+    description: >-
+      Real-time client API for Pushover. Combines a WebSocket
+      channel at wss://client.pushover.net/push that streams
+      single-byte control frames (`#` keepalive, `!` new message,
+      `R` reload, `E` permanent error, `A` session closed) with
+      REST channels for user login, device registration, message
+      download, deletion, and emergency-priority acknowledgement.
+    humanURL: https://pushover.net/api/client
+    baseURL: https://client.pushover.net
+    tags:
+      - Notifications
+      - Push Notifications
+      - WebSocket
+      - Real-Time
+      - Streaming
+    properties:
+      - type: Documentation
+        url: https://pushover.net/api/client
+      - type: AsyncAPI
+        url: https://raw.githubusercontent.com/api-evangelist/pushover/refs/heads/main/openapi/pushover-asyncapi.yml
 
 common:
   - type: GitHubOrganization
