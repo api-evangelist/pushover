@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pushover Message API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Send a message",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.pushover.net/1/messages.json",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Sends a push notification to a user or group device."
+    },
+    {
+      "info": {
+        "name": "Validate a user or group key",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.pushover.net/1/users/validate.json",
+        "body": {
+          "type": "form-urlencoded",
+          "data": [
+            {
+              "name": "token",
+              "value": ""
+            },
+            {
+              "name": "user",
+              "value": ""
+            },
+            {
+              "name": "device",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "docs": "Validate a user or group key"
+    },
+    {
+      "info": {
+        "name": "List available sounds",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.pushover.net/1/sounds.json",
+        "params": [
+          {
+            "name": "token",
+            "value": "",
+            "type": "query",
+            "description": "Application API token."
+          }
+        ]
+      },
+      "docs": "List available sounds"
+    },
+    {
+      "info": {
+        "name": "Application rate limit status",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.pushover.net/1/apps/limits.json",
+        "params": [
+          {
+            "name": "token",
+            "value": "",
+            "type": "query",
+            "description": "Application API token."
+          }
+        ]
+      },
+      "docs": "Application rate limit status"
+    },
+    {
+      "info": {
+        "name": "Retrieve receipt status",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.pushover.net/1/receipts/:receipt.json",
+        "params": [
+          {
+            "name": "receipt",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "token",
+            "value": "",
+            "type": "query",
+            "description": "Application API token."
+          }
+        ]
+      },
+      "docs": "Poll the status of a priority-2 (emergency) message receipt."
+    },
+    {
+      "info": {
+        "name": "Cancel a priority-2 receipt",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.pushover.net/1/receipts/:receipt/cancel.json",
+        "params": [
+          {
+            "name": "receipt",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "form-urlencoded",
+          "data": [
+            {
+              "name": "token",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "docs": "Cancel a priority-2 receipt"
+    }
+  ],
+  "bundled": true
+}
