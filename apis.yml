@@ -8,7 +8,7 @@ description: >-
   with priorities, sounds, images, and supplementary URLs. Additional APIs
   exist for groups, subscriptions, licensing, receipts, and Open Client.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Notifications
   - Push Notifications
