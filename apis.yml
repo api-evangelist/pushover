@@ -80,7 +80,7 @@ common:
     url: https://pushover.net/api
   - type: Pricing
     url: https://pushover.net/pricing
-  - type: SignUp
+  - type: Signup
     url: https://pushover.net/signup
   - type: FAQ
     url: https://pushover.net/faq
