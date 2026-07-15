@@ -72,6 +72,8 @@ apis:
         url: https://raw.githubusercontent.com/api-evangelist/pushover/refs/heads/main/openapi/pushover-asyncapi.yml
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/pushover-agentic-access.yml
   - type: DomainSecurity
     url: security/pushover-domain-security.yml
   - type: GitHubOrganization
