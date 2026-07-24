@@ -1,0 +1,83 @@
+openapi: 3.1.0
+info:
+  title: Pushover Message Apps Receipts API
+  version: 1.0.0
+  description: 'Pushover is a push notification service that delivers real-time
+
+    notifications to phones, tablets, desktops, and watches. The Message
+
+    API accepts HTTPS POSTs with an application API token and recipient
+
+    user/group key to send formatted messages with priorities, sounds,
+
+    images, and supplementary URLs. Additional endpoints expose
+
+    validation, sounds, application rate limits, and receipts for
+
+    priority-2 emergency messages.
+
+    '
+  contact:
+    name: Pushover
+    url: https://pushover.net
+servers:
+- url: https://api.pushover.net/1
+  description: Pushover Message API
+tags:
+- name: Receipts
+paths:
+  /receipts/{receipt}.json:
+    get:
+      summary: Retrieve receipt status
+      description: Poll the status of a priority-2 (emergency) message receipt.
+      operationId: getReceipt
+      parameters:
+      - name: receipt
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: query
+        required: true
+        description: Application API token.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Receipt status.
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Receipts
+  /receipts/{receipt}/cancel.json:
+    post:
+      summary: Cancel a priority-2 receipt
+      operationId: cancelReceipt
+      parameters:
+      - name: receipt
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - token
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Cancellation accepted.
+      tags:
+      - Receipts
+externalDocs:
+  description: Pushover API documentation
+  url: https://pushover.net/api
