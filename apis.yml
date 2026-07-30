@@ -8,7 +8,18 @@ description: >-
   with priorities, sounds, images, and supplementary URLs. Additional APIs
   exist for groups, subscriptions, licensing, receipts, and Open Client.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/pushover.png
 tags:
   - Notifications
   - Push Notifications
@@ -21,56 +32,127 @@ created: '2026-05-11'
 modified: '2026-05-30'
 specificationVersion: '0.19'
 apis:
-  - aid: pushover:message-api
-    name: Pushover Message API
-    description: >-
-      REST API for sending push notifications to Pushover users and groups
-      via HTTPS POSTs to /1/messages.json. Authentication is token-based,
-      requiring an application API token and recipient user/group key with
-      each request; supports priorities, attachments, HTML, and sounds.
-    humanURL: https://pushover.net/api
-    baseURL: https://api.pushover.net/1
-    tags:
-      - Notifications
-      - Messaging
-      - Push
-      - Alerts
-    properties:
-      - type: Documentation
-        url: https://pushover.net/api
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/pushover/refs/heads/main/openapi/pushover-openapi.yml
-      - type: Groups API
-        url: https://pushover.net/api/groups
-      - type: Subscriptions
-        url: https://pushover.net/api/subscriptions
-      - type: Receipts
-        url: https://pushover.net/api#receipt
-      - type: Open Client
-        url: https://pushover.net/api/client
-  - aid: pushover:open-client-api
-    name: Pushover Open Client API
-    description: >-
-      Real-time client API for Pushover. Combines a WebSocket
-      channel at wss://client.pushover.net/push that streams
-      single-byte control frames (`#` keepalive, `!` new message,
-      `R` reload, `E` permanent error, `A` session closed) with
-      REST channels for user login, device registration, message
-      download, deletion, and emergency-priority acknowledgement.
-    humanURL: https://pushover.net/api/client
-    baseURL: https://client.pushover.net
-    tags:
-      - Notifications
-      - Push Notifications
-      - WebSocket
-      - Real-Time
-      - Streaming
-    properties:
-      - type: Documentation
-        url: https://pushover.net/api/client
-      - type: AsyncAPI
-        url: https://raw.githubusercontent.com/api-evangelist/pushover/refs/heads/main/openapi/pushover-asyncapi.yml
-
+- aid: pushover:open-client-api
+  name: Pushover Open Client API
+  description: >-
+    Real-time client API for Pushover. Combines a WebSocket channel at wss://client.pushover.net/push
+    that streams single-byte control frames (`#` keepalive, `!` new message, `R` reload, `E` permanent
+    error, `A` session closed) with REST channels for user login, device registration, message download,
+    deletion, and emergency-priority acknowledgement.
+  humanURL: https://pushover.net/api/client
+  baseURL: https://client.pushover.net
+  tags:
+  - Notifications
+  - Push Notifications
+  - WebSocket
+  - Real-Time
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://pushover.net/api/client
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/pushover/refs/heads/main/openapi/pushover-asyncapi.yml
+- aid: pushover:pushover-apps-api
+  name: Pushover Apps API
+  description: The Apps API from Pushover — 1 operation(s) for apps.
+  humanURL: https://pushover.net/api
+  baseURL: https://api.pushover.net/1
+  tags:
+  - Apps
+  properties:
+  - type: OpenAPI
+    url: openapi/pushover-apps-api-openapi.yml
+  - type: Documentation
+    url: https://pushover.net/api
+  - type: Groups API
+    url: https://pushover.net/api/groups
+  - type: Subscriptions
+    url: https://pushover.net/api/subscriptions
+  - type: Receipts
+    url: https://pushover.net/api#receipt
+  - type: Open Client
+    url: https://pushover.net/api/client
+- aid: pushover:pushover-messages-json-api
+  name: Pushover Messages.json API
+  description: The Messages.json API from Pushover — 1 operation(s) for messages.json.
+  humanURL: https://pushover.net/api
+  baseURL: https://api.pushover.net/1
+  tags:
+  - Messages.json
+  properties:
+  - type: OpenAPI
+    url: openapi/pushover-messages-json-api-openapi.yml
+  - type: Documentation
+    url: https://pushover.net/api
+  - type: Groups API
+    url: https://pushover.net/api/groups
+  - type: Subscriptions
+    url: https://pushover.net/api/subscriptions
+  - type: Receipts
+    url: https://pushover.net/api#receipt
+  - type: Open Client
+    url: https://pushover.net/api/client
+- aid: pushover:pushover-receipts-api
+  name: Pushover Receipts API
+  description: The Receipts API from Pushover — 2 operation(s) for receipts.
+  humanURL: https://pushover.net/api
+  baseURL: https://api.pushover.net/1
+  tags:
+  - Receipts
+  properties:
+  - type: OpenAPI
+    url: openapi/pushover-receipts-api-openapi.yml
+  - type: Documentation
+    url: https://pushover.net/api
+  - type: Groups API
+    url: https://pushover.net/api/groups
+  - type: Subscriptions
+    url: https://pushover.net/api/subscriptions
+  - type: Receipts
+    url: https://pushover.net/api#receipt
+  - type: Open Client
+    url: https://pushover.net/api/client
+- aid: pushover:pushover-sounds-json-api
+  name: Pushover Sounds.json API
+  description: The Sounds.json API from Pushover — 1 operation(s) for sounds.json.
+  humanURL: https://pushover.net/api
+  baseURL: https://api.pushover.net/1
+  tags:
+  - Sounds.json
+  properties:
+  - type: OpenAPI
+    url: openapi/pushover-sounds-json-api-openapi.yml
+  - type: Documentation
+    url: https://pushover.net/api
+  - type: Groups API
+    url: https://pushover.net/api/groups
+  - type: Subscriptions
+    url: https://pushover.net/api/subscriptions
+  - type: Receipts
+    url: https://pushover.net/api#receipt
+  - type: Open Client
+    url: https://pushover.net/api/client
+- aid: pushover:pushover-users-api
+  name: Pushover Users API
+  description: The Users API from Pushover — 1 operation(s) for users.
+  humanURL: https://pushover.net/api
+  baseURL: https://api.pushover.net/1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/pushover-users-api-openapi.yml
+  - type: Documentation
+    url: https://pushover.net/api
+  - type: Groups API
+    url: https://pushover.net/api/groups
+  - type: Subscriptions
+    url: https://pushover.net/api/subscriptions
+  - type: Receipts
+    url: https://pushover.net/api#receipt
+  - type: Open Client
+    url: https://pushover.net/api/client
 common:
   - type: AgenticAccess
     url: agentic-access/pushover-agentic-access.yml
