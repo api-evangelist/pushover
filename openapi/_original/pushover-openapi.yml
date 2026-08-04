@@ -1,0 +1,263 @@
+openapi: 3.1.0
+info:
+  title: Pushover Message API
+  version: "1.0.0"
+  description: |
+    Pushover is a push notification service that delivers real-time
+    notifications to phones, tablets, desktops, and watches. The Message
+    API accepts HTTPS POSTs with an application API token and recipient
+    user/group key to send formatted messages with priorities, sounds,
+    images, and supplementary URLs. Additional endpoints expose
+    validation, sounds, application rate limits, and receipts for
+    priority-2 emergency messages.
+  contact:
+    name: Pushover
+    url: https://pushover.net
+externalDocs:
+  description: Pushover API documentation
+  url: https://pushover.net/api
+servers:
+  - url: https://api.pushover.net/1
+    description: Pushover Message API
+paths:
+  /messages.json:
+    post:
+      summary: Send a message
+      description: Sends a push notification to a user or group device.
+      operationId: sendMessage
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MessageRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageRequest'
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/MessageRequest'
+                - type: object
+                  properties:
+                    attachment:
+                      type: string
+                      format: binary
+                      description: Image attachment (PNG/JPG/GIF, 5 MB max).
+      responses:
+        "200":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        "400":
+          description: Validation error.
+  /users/validate.json:
+    post:
+      summary: Validate a user or group key
+      operationId: validateUser
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [token, user]
+              properties:
+                token:
+                  type: string
+                  description: Application API token.
+                user:
+                  type: string
+                  description: User or group key to validate.
+                device:
+                  type: string
+                  description: Specific device to validate.
+      responses:
+        "200":
+          description: Validation result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  devices:
+                    type: array
+                    items:
+                      type: string
+                  licenses:
+                    type: array
+                    items:
+                      type: string
+  /sounds.json:
+    get:
+      summary: List available sounds
+      operationId: listSounds
+      parameters:
+        - name: token
+          in: query
+          required: true
+          description: Application API token.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Sounds list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sounds:
+                    type: object
+                    additionalProperties:
+                      type: string
+  /apps/limits.json:
+    get:
+      summary: Application rate limit status
+      operationId: getAppLimits
+      parameters:
+        - name: token
+          in: query
+          required: true
+          description: Application API token.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Current limits.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                  remaining:
+                    type: integer
+                  reset:
+                    type: integer
+                    description: Unix timestamp when the count resets.
+  /receipts/{receipt}.json:
+    get:
+      summary: Retrieve receipt status
+      description: Poll the status of a priority-2 (emergency) message receipt.
+      operationId: getReceipt
+      parameters:
+        - name: receipt
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: token
+          in: query
+          required: true
+          description: Application API token.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Receipt status.
+          content:
+            application/json:
+              schema:
+                type: object
+  /receipts/{receipt}/cancel.json:
+    post:
+      summary: Cancel a priority-2 receipt
+      operationId: cancelReceipt
+      parameters:
+        - name: receipt
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [token]
+              properties:
+                token:
+                  type: string
+      responses:
+        "200":
+          description: Cancellation accepted.
+components:
+  schemas:
+    MessageRequest:
+      type: object
+      required: [token, user, message]
+      properties:
+        token:
+          type: string
+          description: Application API token (registered application).
+        user:
+          type: string
+          description: Recipient user or group key.
+        message:
+          type: string
+          description: Message body (max 1024 UTF-8 characters).
+        title:
+          type: string
+          description: Notification title (max 250 characters).
+        device:
+          type: string
+          description: Comma-separated list of device names to target.
+        priority:
+          type: integer
+          enum: [-2, -1, 0, 1, 2]
+          description: -2 lowest, -1 low, 0 normal, 1 high, 2 emergency (requires retry and expire).
+        sound:
+          type: string
+          description: Notification sound name (see /sounds.json).
+        timestamp:
+          type: integer
+          description: Unix timestamp to display.
+        ttl:
+          type: integer
+          description: Time-to-live in seconds.
+        url:
+          type: string
+          description: Supplementary URL.
+        url_title:
+          type: string
+        html:
+          type: integer
+          enum: [0, 1]
+          description: Set to 1 to enable HTML formatting.
+        monospace:
+          type: integer
+          enum: [0, 1]
+        retry:
+          type: integer
+          description: Seconds between retries for priority=2 messages.
+        expire:
+          type: integer
+          description: Total time priority=2 messages will retry.
+        attachment_base64:
+          type: string
+          description: Base64-encoded image attachment.
+        attachment_type:
+          type: string
+          description: MIME type of attachment_base64.
+        encrypted:
+          type: integer
+          enum: [0, 1]
+    MessageResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: 1 on success.
+        request:
+          type: string
+          description: Request ID.
+        receipt:
+          type: string
+          description: Receipt token (only for priority=2 messages).

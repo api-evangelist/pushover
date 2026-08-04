@@ -1,0 +1,22 @@
+{
+  "provider": "pushover",
+  "sources": [
+    "pushover-apps-api-openapi.yml",
+    "pushover-messages-json-api-openapi.yml",
+    "pushover-receipts-api-openapi.yml",
+    "pushover-sounds-json-api-openapi.yml",
+    "pushover-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "pushover-apps-api-openapi.yml",
+    "pushover-messages-json-api-openapi.yml",
+    "pushover-receipts-api-openapi.yml",
+    "pushover-sounds-json-api-openapi.yml",
+    "pushover-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
