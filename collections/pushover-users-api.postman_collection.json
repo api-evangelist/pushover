@@ -1,0 +1,159 @@
+{
+  "item": [
+    {
+      "id": "d57e2afb-7c9c-4851-a13a-fc4011e54085",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "499d6379-509e-4df2-8944-d04735db426e",
+          "name": "Validate a user or group key",
+          "request": {
+            "name": "Validate a user or group key",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                "validate.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) Application API token."
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "(Required) User or group key to validate."
+                },
+                {
+                  "disabled": false,
+                  "key": "device",
+                  "value": "<string>",
+                  "description": "Specific device to validate."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7608756b-7b3a-4f68-a74e-a6f17b44c380",
+              "name": "Validation result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "validate.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Application API token.",
+                        "type": "text/plain"
+                      },
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) User or group key to validate.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Specific device to validate.",
+                        "type": "text/plain"
+                      },
+                      "key": "device",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 8035,\n  \"devices\": [\n    \"string\",\n    \"string\"\n  ],\n  \"licenses\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pushover.net/1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "76fbd0ae-0555-4d6d-ae26-b0f3f3f652af",
+    "name": "Pushover Message Apps Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pushover is a push notification service that delivers real-time\nnotifications to phones, tablets, desktops, and watches. The Message\nAPI accepts HTTPS POSTs with an application API token and recipient\nuser/group key to send formatted messages with priorities, sounds,\nimages, and supplementary URLs. Additional endpoints expose\nvalidation, sounds, application rate limits, and receipts for\npriority-2 emergency messages.\n\n\nContact Support:\n Name: Pushover",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pushover Message Apps Sounds.json API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sounds.json",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available sounds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pushover.net/1/sounds.json",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "Application API token."
+              }
+            ]
+          },
+          "docs": "List available sounds"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

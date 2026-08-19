@@ -1,0 +1,553 @@
+{
+  "item": [
+    {
+      "id": "40c11bdb-a773-4691-8062-b3a9329c477c",
+      "name": "Messages.json",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c35758d9-8fe2-4eb2-bb36-73582dc8799e",
+          "name": "Send a message",
+          "request": {
+            "name": "Send a message",
+            "description": {
+              "content": "Sends a push notification to a user or group device.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "messages.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) Application API token (registered application)."
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "(Required) Recipient user or group key."
+                },
+                {
+                  "disabled": false,
+                  "key": "message",
+                  "value": "<string>",
+                  "description": "(Required) Message body (max 1024 UTF-8 characters)."
+                },
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "Notification title (max 250 characters)."
+                },
+                {
+                  "disabled": false,
+                  "key": "device",
+                  "value": "<string>",
+                  "description": "Comma-separated list of device names to target."
+                },
+                {
+                  "disabled": false,
+                  "key": "priority",
+                  "value": "<integer>",
+                  "description": "-2 lowest, -1 low, 0 normal, 1 high, 2 emergency (requires retry and expire)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sound",
+                  "value": "<string>",
+                  "description": "Notification sound name (see /sounds.json)."
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<integer>",
+                  "description": "Unix timestamp to display."
+                },
+                {
+                  "disabled": false,
+                  "key": "ttl",
+                  "value": "<integer>",
+                  "description": "Time-to-live in seconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>",
+                  "description": "Supplementary URL."
+                },
+                {
+                  "disabled": false,
+                  "key": "url_title",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "html",
+                  "value": "<integer>",
+                  "description": "Set to 1 to enable HTML formatting."
+                },
+                {
+                  "disabled": false,
+                  "key": "monospace",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "retry",
+                  "value": "<integer>",
+                  "description": "Seconds between retries for priority=2 messages."
+                },
+                {
+                  "disabled": false,
+                  "key": "expire",
+                  "value": "<integer>",
+                  "description": "Total time priority=2 messages will retry."
+                },
+                {
+                  "disabled": false,
+                  "key": "attachment_base64",
+                  "value": "<string>",
+                  "description": "Base64-encoded image attachment."
+                },
+                {
+                  "disabled": false,
+                  "key": "attachment_type",
+                  "value": "<string>",
+                  "description": "MIME type of attachment_base64."
+                },
+                {
+                  "disabled": false,
+                  "key": "encrypted",
+                  "value": "<integer>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1a5c431c-d90a-47f2-a31f-ede7964fc1c7",
+              "name": "Accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Application API token (registered application).",
+                        "type": "text/plain"
+                      },
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Recipient user or group key.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Message body (max 1024 UTF-8 characters).",
+                        "type": "text/plain"
+                      },
+                      "key": "message",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Notification title (max 250 characters).",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Comma-separated list of device names to target.",
+                        "type": "text/plain"
+                      },
+                      "key": "device",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "-2 lowest, -1 low, 0 normal, 1 high, 2 emergency (requires retry and expire).",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Notification sound name (see /sounds.json).",
+                        "type": "text/plain"
+                      },
+                      "key": "sound",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unix timestamp to display.",
+                        "type": "text/plain"
+                      },
+                      "key": "timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Time-to-live in seconds.",
+                        "type": "text/plain"
+                      },
+                      "key": "ttl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Supplementary URL.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "url_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to 1 to enable HTML formatting.",
+                        "type": "text/plain"
+                      },
+                      "key": "html",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "monospace",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds between retries for priority=2 messages.",
+                        "type": "text/plain"
+                      },
+                      "key": "retry",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Total time priority=2 messages will retry.",
+                        "type": "text/plain"
+                      },
+                      "key": "expire",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Base64-encoded image attachment.",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment_base64",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "MIME type of attachment_base64.",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "encrypted",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 9747,\n  \"request\": \"string\",\n  \"receipt\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "234700c2-0f91-4ec4-843c-776bb78b4b12",
+              "name": "Validation error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Application API token (registered application).",
+                        "type": "text/plain"
+                      },
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Recipient user or group key.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Message body (max 1024 UTF-8 characters).",
+                        "type": "text/plain"
+                      },
+                      "key": "message",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Notification title (max 250 characters).",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Comma-separated list of device names to target.",
+                        "type": "text/plain"
+                      },
+                      "key": "device",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "-2 lowest, -1 low, 0 normal, 1 high, 2 emergency (requires retry and expire).",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Notification sound name (see /sounds.json).",
+                        "type": "text/plain"
+                      },
+                      "key": "sound",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unix timestamp to display.",
+                        "type": "text/plain"
+                      },
+                      "key": "timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Time-to-live in seconds.",
+                        "type": "text/plain"
+                      },
+                      "key": "ttl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Supplementary URL.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "url_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to 1 to enable HTML formatting.",
+                        "type": "text/plain"
+                      },
+                      "key": "html",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "monospace",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds between retries for priority=2 messages.",
+                        "type": "text/plain"
+                      },
+                      "key": "retry",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Total time priority=2 messages will retry.",
+                        "type": "text/plain"
+                      },
+                      "key": "expire",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Base64-encoded image attachment.",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment_base64",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "MIME type of attachment_base64.",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "encrypted",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pushover.net/1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6ee1ab03-94de-4062-9d11-7185d19893f2",
+    "name": "Pushover Message Apps Messages.json API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pushover is a push notification service that delivers real-time\nnotifications to phones, tablets, desktops, and watches. The Message\nAPI accepts HTTPS POSTs with an application API token and recipient\nuser/group key to send formatted messages with priorities, sounds,\nimages, and supplementary URLs. Additional endpoints expose\nvalidation, sounds, application rate limits, and receipts for\npriority-2 emergency messages.\n\n\nContact Support:\n Name: Pushover",
+      "type": "text/plain"
+    }
+  }
+}

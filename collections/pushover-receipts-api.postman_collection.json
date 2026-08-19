@@ -1,0 +1,231 @@
+{
+  "item": [
+    {
+      "id": "24dedc26-1cbc-4a1c-9c6d-0dd0ccc8ede7",
+      "name": "Receipts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "77e038e5-b375-431a-9cb7-6816f46a85f2",
+          "name": "Retrieve receipt status",
+          "request": {
+            "name": "Retrieve receipt status",
+            "description": {
+              "content": "Poll the status of a priority-2 (emergency) message receipt.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "receipts",
+                "{{receipt}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) Application API token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54652104-b4cf-416c-8731-87e0a9fd6c0e",
+              "name": "Receipt status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "receipts",
+                    "{{receipt}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a05191bd-57ea-4f30-ab58-a9c9ae209bd0",
+          "name": "Cancel a priority-2 receipt",
+          "request": {
+            "name": "Cancel a priority-2 receipt",
+            "description": {},
+            "url": {
+              "path": [
+                "receipts",
+                ":receipt",
+                "cancel.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "receipt",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c4fcc9c5-1284-4563-b99a-72f034e72b3c",
+              "name": "Cancellation accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "receipts",
+                    ":receipt",
+                    "cancel.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "receipt",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pushover.net/1",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "receipt"
+    }
+  ],
+  "info": {
+    "_postman_id": "37644af8-23cf-4688-b68e-7de216cdb92b",
+    "name": "Pushover Message Apps Receipts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pushover is a push notification service that delivers real-time\nnotifications to phones, tablets, desktops, and watches. The Message\nAPI accepts HTTPS POSTs with an application API token and recipient\nuser/group key to send formatted messages with priorities, sounds,\nimages, and supplementary URLs. Additional endpoints expose\nvalidation, sounds, application rate limits, and receipts for\npriority-2 emergency messages.\n\n\nContact Support:\n Name: Pushover",
+      "type": "text/plain"
+    }
+  }
+}

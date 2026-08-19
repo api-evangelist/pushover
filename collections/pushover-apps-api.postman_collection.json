@@ -1,0 +1,113 @@
+{
+  "item": [
+    {
+      "id": "6a34e7b0-1545-4ddc-9881-aa8374669a42",
+      "name": "Apps",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dd7b70df-241f-406b-9df8-967859d67780",
+          "name": "Application rate limit status",
+          "request": {
+            "name": "Application rate limit status",
+            "description": {},
+            "url": {
+              "path": [
+                "apps",
+                "limits.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) Application API token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "921a0ee4-afa4-464e-a5fe-71438ee97049",
+              "name": "Current limits.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apps",
+                    "limits.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 4656,\n  \"remaining\": 4005,\n  \"reset\": 9104\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pushover.net/1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "40231f9d-9297-4f60-9b92-19a165c7a710",
+    "name": "Pushover Message Apps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pushover is a push notification service that delivers real-time\nnotifications to phones, tablets, desktops, and watches. The Message\nAPI accepts HTTPS POSTs with an application API token and recipient\nuser/group key to send formatted messages with priorities, sounds,\nimages, and supplementary URLs. Additional endpoints expose\nvalidation, sounds, application rate limits, and receipts for\npriority-2 emergency messages.\n\n\nContact Support:\n Name: Pushover",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pushover Message Apps Users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate a user or group key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pushover.net/1/users/validate.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "token",
+                  "value": ""
+                },
+                {
+                  "name": "user",
+                  "value": ""
+                },
+                {
+                  "name": "device",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Validate a user or group key"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

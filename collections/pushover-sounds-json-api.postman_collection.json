@@ -1,0 +1,111 @@
+{
+  "item": [
+    {
+      "id": "b035e3e1-992d-4b16-ba03-93b6635f988c",
+      "name": "Sounds.json",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ef2525ca-9b52-416c-9817-2a76f935c386",
+          "name": "List available sounds",
+          "request": {
+            "name": "List available sounds",
+            "description": {},
+            "url": {
+              "path": [
+                "sounds.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) Application API token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0ac0f2f-9e88-4770-bf1d-d9da059b62fb",
+              "name": "Sounds list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sounds.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sounds\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pushover.net/1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "491bf30b-6578-4830-a3aa-82e60674804a",
+    "name": "Pushover Message Apps Sounds.json API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pushover is a push notification service that delivers real-time\nnotifications to phones, tablets, desktops, and watches. The Message\nAPI accepts HTTPS POSTs with an application API token and recipient\nuser/group key to send formatted messages with priorities, sounds,\nimages, and supplementary URLs. Additional endpoints expose\nvalidation, sounds, application rate limits, and receipts for\npriority-2 emergency messages.\n\n\nContact Support:\n Name: Pushover",
+      "type": "text/plain"
+    }
+  }
+}
