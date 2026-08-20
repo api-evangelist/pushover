@@ -21,6 +21,12 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/pushover.png
 tags:
+  - Notification
+  - Push Notifications
+  - Messaging
+  - Alerts
+  - Monitoring
+tags_raw:
   - Notifications
   - Push Notifications
   - Messaging
@@ -42,6 +48,12 @@ apis:
   humanURL: https://pushover.net/api/client
   baseURL: https://client.pushover.net
   tags:
+  - Notification
+  - Push Notifications
+  - WebSocket
+  - Real-Time
+  - Streaming
+  tags_raw:
   - Notifications
   - Push Notifications
   - WebSocket
@@ -59,6 +71,8 @@ apis:
   humanURL: https://pushover.net/api
   baseURL: https://api.pushover.net/1
   tags:
+  - Application
+  tags_raw:
   - Apps
   properties:
   - type: OpenAPI
@@ -139,6 +153,8 @@ apis:
   humanURL: https://pushover.net/api
   baseURL: https://api.pushover.net/1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
