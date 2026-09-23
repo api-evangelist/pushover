@@ -1,11 +1,7 @@
 {
   "provider": "pushover",
   "sources": [
-    "pushover-apps-api-openapi.yml",
-    "pushover-messages-json-api-openapi.yml",
-    "pushover-receipts-api-openapi.yml",
-    "pushover-sounds-json-api-openapi.yml",
-    "pushover-users-api-openapi.yml"
+    "_original/pushover-openapi.yml"
   ],
   "outputs": [
     "pushover-apps-api-openapi.yml",
@@ -17,6 +13,27 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "pushover-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "pushover-openapi.yml: tagged paths POST /messages.json -> Messages.json",
+    "pushover-openapi.yml: tagged paths POST /users/validate.json -> Users",
+    "pushover-openapi.yml: tagged paths GET /sounds.json -> Sounds.json",
+    "pushover-openapi.yml: tagged paths GET /apps/limits.json -> Apps",
+    "pushover-openapi.yml: tagged paths GET /receipts/{receipt}.json -> Receipts",
+    "pushover-openapi.yml: tagged paths POST /receipts/{receipt}/cancel.json -> Receipts",
+    "pushover-openapi.yml: declared missing tag: Apps",
+    "pushover-openapi.yml: declared missing tag: Messages.json",
+    "pushover-openapi.yml: declared missing tag: Receipts",
+    "pushover-openapi.yml: declared missing tag: Sounds.json",
+    "pushover-openapi.yml: declared missing tag: Users",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "pushover-apps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pushover-messages-json-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pushover-receipts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pushover-sounds-json-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pushover-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

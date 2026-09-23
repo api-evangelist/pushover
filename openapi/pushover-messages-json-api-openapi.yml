@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Pushover Message Apps Messages.json API
+  title: Pushover Message Messages.json API
   version: 1.0.0
   description: 'Pushover is a push notification service that delivers real-time
 
@@ -14,9 +14,7 @@ info:
 
     validation, sounds, application rate limits, and receipts for
 
-    priority-2 emergency messages.
-
-    '
+    priority-2 emergency messages.'
   contact:
     name: Pushover
     url: https://pushover.net
@@ -63,18 +61,6 @@ paths:
       - Messages.json
 components:
   schemas:
-    MessageResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: 1 on success.
-        request:
-          type: string
-          description: Request ID.
-        receipt:
-          type: string
-          description: Receipt token (only for priority=2 messages).
     MessageRequest:
       type: object
       required:
@@ -148,6 +134,18 @@ components:
           enum:
           - 0
           - 1
+    MessageResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: 1 on success.
+        request:
+          type: string
+          description: Request ID.
+        receipt:
+          type: string
+          description: Receipt token (only for priority=2 messages).
 externalDocs:
   description: Pushover API documentation
   url: https://pushover.net/api
