@@ -61,6 +61,18 @@ paths:
       - Messages.json
 components:
   schemas:
+    MessageResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: 1 on success.
+        request:
+          type: string
+          description: Request ID.
+        receipt:
+          type: string
+          description: Receipt token (only for priority=2 messages).
     MessageRequest:
       type: object
       required:
@@ -134,18 +146,6 @@ components:
           enum:
           - 0
           - 1
-    MessageResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: 1 on success.
-        request:
-          type: string
-          description: Request ID.
-        receipt:
-          type: string
-          description: Receipt token (only for priority=2 messages).
 externalDocs:
   description: Pushover API documentation
   url: https://pushover.net/api
