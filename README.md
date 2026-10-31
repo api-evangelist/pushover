@@ -1,4 +1,4 @@
-# Pushover (pushover)
+# Pushover
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,86 +66,110 @@
 
 Pushover is a simple push notification service that delivers real-time notifications to phones, tablets, desktops, and watches from servers, scripts, and applications. The Pushover Message API accepts HTTPS POSTs with an application token and user/group key to send formatted messages with priorities, sounds, images, and supplementary URLs. Additional APIs exist for groups, subscriptions, licensing, receipts, and Open Client.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/pushover/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/pushover/refs/heads/main/apis.yml)
+**Areas:** Notification · Push Notifications · Messaging · Alerts · Monitoring
 
-## Scope
+## Pushover on APIs.io
 
-- **Type:** Index
+Everything profiled for Pushover is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/pushover/](https://apis.io/providers/pushover/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (6)
 
-- Notifications
-- Push Notifications
-- Messaging
-- Alerts
-- Monitoring
+- [Pushover Open Client API](https://apis.io/apis/pushover/open-client-api/) — Real-time client API for Pushover. Combines a WebSocket channel at wss://client.pushover.net/push that streams single-byte control frames (`#` keepalive,…
+- [Pushover Apps API](https://apis.io/apis/pushover/pushover-apps-api/) — The Apps API from Pushover — 1 operation(s) for apps.
+- [Pushover Messages.json API](https://apis.io/apis/pushover/pushover-messages-json-api/) — The Messages.json API from Pushover — 1 operation(s) for messages.json.
+- [Pushover Receipts API](https://apis.io/apis/pushover/pushover-receipts-api/) — The Receipts API from Pushover — 2 operation(s) for receipts.
+- [Pushover Sounds.json API](https://apis.io/apis/pushover/pushover-sounds-json-api/) — The Sounds.json API from Pushover — 1 operation(s) for sounds.json.
+- [Pushover Users API](https://apis.io/apis/pushover/pushover-users-api/) — The Users API from Pushover — 1 operation(s) for users.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-11
-- **Modified:** 2026-05-30
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Pushover Message API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-REST API for sending push notifications to Pushover users and groups via HTTPS POSTs to /1/messages.json. Authentication is token-based, requiring an application API token and recipient user/group key with each request; supports priorities, attachments, HTML, and sounds.
+- [Pushover Agentic Access](https://apis.io/agentic-access/pushover/pushover-agentic-access/)
 
-- **Human URL:** [https://pushover.net/api](https://pushover.net/api)
-- **Base URL:** `https://api.pushover.net/1`
+#### Collections (7)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Notifications
-- Messaging
-- Push
-- Alerts
+- [Pushover Message API](https://apis.io/collections/pushover/open-pushover/)
+- [Pushover Message Apps API](https://apis.io/collections/pushover/open-pushover-apps-api/)
+- [Pushover Open Client API](https://apis.io/collections/pushover/open-pushover-asyncapi/)
+- [Pushover Message Apps Messages.json API](https://apis.io/collections/pushover/open-pushover-messages-json-api/)
+- [Pushover Message Apps Receipts API](https://apis.io/collections/pushover/open-pushover-receipts-api/)
+- [Pushover Message Apps Sounds.json API](https://apis.io/collections/pushover/open-pushover-sounds-json-api/)
+- [Pushover Message Apps Users API](https://apis.io/collections/pushover/open-pushover-users-api/)
 
-#### Properties
+#### Security (1)
 
-- [Documentation](https://pushover.net/api)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/pushover/refs/heads/main/openapi/pushover-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Groups  A P I](https://pushover.net/api/groups)
-- [Subscriptions](https://pushover.net/api/subscriptions)
-- [Receipts](https://pushover.net/api#receipt)
-- [Open  Client](https://pushover.net/api/client)
-- [Postman Collection](collections/pushover.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/pushover.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-### Pushover Open Client API
+- [Pushover Domain Security](https://apis.io/security/pushover/pushover-domain-security/)
 
-Real-time client API for Pushover. Combines a WebSocket channel at wss://client.pushover.net/push that streams single-byte control frames (`#` keepalive, `!` new message, `R` reload, `E` permanent error, `A` session closed) with REST channels for user login, device registration, message download, deletion, and emergency-priority acknowledgement.
+## Where to find this API
 
-- **Human URL:** [https://pushover.net/api/client](https://pushover.net/api/client)
-- **Base URL:** `https://client.pushover.net`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Notifications
-- Push Notifications
-- WebSocket
-- Real-Time
-- Streaming
-
-#### Properties
-
-- [Documentation](https://pushover.net/api/client)
-- [AsyncAPI](https://raw.githubusercontent.com/api-evangelist/pushover/refs/heads/main/openapi/pushover-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/pushover.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/pushover.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/pushoverapp)
 - [Website](https://pushover.net)
 - [Documentation](https://pushover.net/api)
 - [Pricing](https://pushover.net/pricing)
-- [Sign Up](https://pushover.net/signup)
-- [F A Q](https://pushover.net/faq)
 - [Support](https://pushover.net/support)
-- [Status Page](https://status.pushover.net)
+- [Blog](https://blog.pushover.net/rss)
+- [GitHub](https://github.com/pushoverapp)
+- [Status](https://status.pushover.net)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.1 |
+| Contract governance | 0.0 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 16.7 |
+| Access clarity | 23.7 |
+
+**Agent readiness 20.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | unknown |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/pushover/](https://apis.io/providers/pushover/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Pushover: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/pushover/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
